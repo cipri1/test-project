@@ -1,6 +1,5 @@
 package stepdefinitions;
 
-import java.util.Date;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +13,7 @@ import pageobjects.ResultsPage;
 
 
 import java.io.File;
+import java.time.LocalDateTime;
 
 public class StepDefinitions {
 
@@ -56,7 +56,13 @@ public class StepDefinitions {
 
     @And("I select as a departing date the next day and returning after {int} days")
     public void iSelectAsADepartingDateTheNextDayAndReturningAfterDays(int days) {
-        Date today = new Date();
+        Homepage homepage = new Homepage(driver);
+        homepage.departingDatePicker.click();
+        String departingDate = homepage.departingDatePicker.getAttribute("value");
+
+        LocalDateTime today = new LocalDateTime.now();
+        LocalDateTime tomorrow = today.plusDays(1);
+        LocalDateTime futureDate = today.plusDays(days);
     }
 
     @When("I click find deal button")

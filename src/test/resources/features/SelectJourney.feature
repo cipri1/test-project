@@ -7,4 +7,3 @@ Feature: Booking journey
     And I select as a departing date the next day and returning after 20 days
     When I click find deal button
     Then I expect there is at least one result returned
-
